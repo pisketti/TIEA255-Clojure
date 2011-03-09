@@ -54,7 +54,7 @@ Clojure
 status collapsed
 
 \begin_layout Plain Layout
-Tarmo Aidantausta
+Tarmo
 \end_layout
 
 \end_inset
@@ -64,7 +64,30 @@ Tarmo Aidantausta
 status collapsed
 
 \begin_layout Plain Layout
-Tero Kadenius
+Aidantausta
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+\begin_inset Flex Element:Firstname
+status collapsed
+
+\begin_layout Plain Layout
+Tero
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex Element:Surname
+status collapsed
+
+\begin_layout Plain Layout
+Kadenius
 \end_layout
 
 \end_inset
@@ -88,8 +111,42 @@ Mikä on Clojure?
 Funktio-ohjelmointi -kieli
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+functional vs.
+ imperative programming
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Lisp
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Dynamically typed
+\end_layout
+
+\begin_layout Itemize
+Homoiconic
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Code as data.
+ Data as code.
+\end_layout
+
+\begin_layout Itemize
+meta programming.
+ Advanced macros.
+ 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Immutable data structures
 \end_layout
 
 \begin_layout Section
@@ -97,11 +154,28 @@ Rinnakkaisuus Clojuressa
 \end_layout
 
 \begin_layout Subsection
+Reference types
+\end_layout
+
+\begin_layout Itemize
+atom, agent and ref
+\end_layout
+
+\begin_layout Itemize
+identity and equality
+\end_layout
+
+\begin_layout Subsection
 Software transactional memory system (STM)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
+refs require a transaction
+\end_layout
 
+\begin_layout Subsection
+Example: Java vs.
+ Clojure
 \end_layout
 
 \end_body
