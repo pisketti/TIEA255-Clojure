@@ -1,4 +1,4 @@
-#LyX 1.6.8 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.9 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -17,6 +17,7 @@
 
 \graphics default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -96,7 +97,7 @@ Kadenius
 \end_layout
 
 \begin_layout Abstract
-Clojure on puhevika.
+Clojure is a lisp.
 \end_layout
 
 \begin_layout Section
@@ -104,12 +105,121 @@ Clojure
 \end_layout
 
 \begin_layout Subsection
-wut is Clojure?
+Wut is Clojure?
 \end_layout
 
 \begin_layout Standard
 Shortly Clojure, a dialect of Lisp, is a dynamically typed functional programmin
 g language hosted on virtual machines like JVM and CLR.
+\end_layout
+
+\begin_layout Subsubsection
+Dialect of Lisp
+\end_layout
+
+\begin_layout Code
+(= 2 (+ 1 1))
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Lisp is a family of computer programming languages based on formal functional
+ calculus.
+ Lisp (for "List Processing Language") stores and manipulates programs in
+ the same manner as any other data, making it well suited for "meta-programming"
+ applications.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lisp-wikiquote"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Dynamic typing
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+In a
+\emph on
+ dynamically typed 
+\emph default
+language, values have fixed types, but variables and expressions have no
+ fixed types.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "watt-04"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Functional programming
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+In functional programming, the model of computation is the application of
+ functions to arguments.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "watt-04"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Key features
+\end_layout
+
+\begin_layout Standard
+What makes Clojure stand out in the pool of new and fancy programming language
+ is that it has been developed from the ground up with multithreaded programming
+ in mind.
+ 
+\emph on
+Immutable data structures
+\emph default
+, support for 
+\emph on
+software transactional memory
+\emph default
+ (STM) with the combination of 
+\emph on
+functional programming
+\emph default
+ paradigm give Clojure good tools working with concurrency.
+\end_layout
+
+\begin_layout Standard
+In addition to a sound concurrency story Clojure also provides dynamic developme
+nt environment via Read-Eval-Print-Loop (REPL).
+ With REPL you can ...
 \end_layout
 
 \begin_layout Subsubsection
@@ -122,8 +232,15 @@ Imperative programming
 \end_layout
 
 \begin_layout Quotation
-"Imperative programming is a programming paradigm that describes computation
- in terms of statements that change a program state."
+\begin_inset Quotes eld
+\end_inset
+
+Imperative programming is a programming paradigm that describes computation
+ in terms of statements that change a program state.
+\begin_inset Quotes erd
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wiki-imp-prg"
@@ -153,9 +270,8 @@ key "wiki-imp-prg"
 Object oriented programming
 \end_layout
 
-\begin_layout Standard
-Object oriented programming provides a feature called encapsulation.
- "The set of values of the attributes of a particular object is called its
+\begin_layout Quotation
+"The set of values of the attributes of a particular object is called its
  state.
  The object consists of state and the behavior that's defined in the object's
  classes." 
@@ -165,6 +281,11 @@ key "wiki-oo"
 
 \end_inset
 
+ 
+\end_layout
+
+\begin_layout Standard
+Object oriented programming provides a feature called encapsulation.
  Encapsulation prevents users of the object from direcly modifying the data
  that forms the state by providing operations (methods) for doing it.
  This is done in order to ensure the validity of the internal state of the
@@ -196,12 +317,19 @@ key "cloj-state"
 Functional programming
 \end_layout
 
-\begin_layout Standard
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
 Functional programming has its roots in mathematics.
  Instead of providing instructions for modifying the state of the program,
  functional programming emphasizes the application of functions and avoid
  state and mutable data in general.
  
+\begin_inset Quotes eld
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wiki-func"
@@ -426,42 +554,6 @@ key "cloj-state"
 
 \end_layout
 
-\begin_layout Standard
-To quote Rich Hickey, the creator of Clojure: "Encapsulation just means:
- I'm in charge of this spaghetti code."
-\end_layout
-
-\begin_layout Itemize
-Lisp
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Dynamically typed
-\end_layout
-
-\begin_layout Itemize
-Homoiconic
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Code as data.
- Data as code.
-\end_layout
-
-\begin_layout Itemize
-meta programming.
- Advanced macros.
- 
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Itemize
-Immutable data structures
-\end_layout
-
 \begin_layout Section
 Concurrency/parallelism in Clojure
 \end_layout
@@ -504,32 +596,6 @@ options "plain"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Itemize
-[msdn-func-imp] "TAULUKKO eroista" http://msdn.microsoft.com/en-us/library/bb66914
-4.aspx
-\end_layout
-
-\begin_layout Itemize
-[cloj-state] http://clojure.org/state 
-\end_layout
-
-\begin_layout Itemize
-[wiki-func] http://en.wikipedia.org/wiki/Functional_programming 
-\end_layout
-
-\begin_layout Itemize
-[wiki-imp-prg] http://en.wikipedia.org/wiki/Imperative_programming 
-\end_layout
-
-\begin_layout Itemize
-[wiki-oo] http://en.wikipedia.org/wiki/Object-oriented_programming 
-\end_layout
-
-\begin_layout Itemize
-[wiki-oo-enc] http://en.wikipedia.org/wiki/Encapsulation_%28object-oriented_progra
-mming%29 
 \end_layout
 
 \end_body
