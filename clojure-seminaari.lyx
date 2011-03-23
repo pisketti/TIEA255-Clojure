@@ -104,7 +104,7 @@ Clojure
 \end_layout
 
 \begin_layout Subsection
-wut is Clojure?
+What is Clojure?
 \end_layout
 
 \begin_layout Standard
@@ -138,7 +138,17 @@ Nearly all machine code implementations are written in imperative style.
  The contents of the memory holds the state and machine language instructions
  modify it.
  Higher-level imperative languages have more advanced features like variables
- and complex statements, but the basic idea remains the same.
+ and complex statements, but the bas
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ic idea remains the same.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -208,7 +218,185 @@ key "wiki-func"
 
 \end_inset
 
+ 
+\end_layout
 
+\begin_layout Standard
+Of course functions are not unique to functional programming languages.
+ However, functional languages have what is called 
+\emph on
+first class functions
+\emph default
+.
+ This means that they have a central role in the code, much like objects
+ do in OO languages.
+ Functions can be stored to data structures and the use of 
+\emph on
+higher-order functions
+\emph default
+ is common.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-1st-class-fn"
+
+\end_inset
+
+ Higher-order function is a function that either takes one or more functions
+ as parameters or returns one as a value.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-higher-fn"
+
+\end_inset
+
+ Well-known examples of higher-order functions are 
+\emph on
+map
+\emph default
+ and 
+\emph on
+fold
+\emph default
+ 
+\shape italic
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-fold"
+
+\end_inset
+
+.
+
+\shape default
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Map is the name of a higher-order function that applies a given function
+ element-wise to a list of elements and returns a list of results.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-map"
+
+\end_inset
+
+.
+ Fold is a 
+\begin_inset Quotes eld
+\end_inset
+
+function that iterate an arbitrary function over a data structure in some
+ order and build up a return value
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-fold"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Doubling the value of every item in a list with map:
+\emph on
+
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(map (fn [x] (* x 2)) '(1 2 3))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+In Clojure fold is called reduce.
+ A trivial example for calculating the sum of the items in a list: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(reduce + '(1 2 3))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+They can be passed the focus is in pure functions.
+ Pure functions if:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+The function always evaluates the same result value given the same argument
+ value(s).
+ The function result value cannot depend on any hidden information or state
+ that may change as program execution proceeds or between different executions
+ of the program, nor can it depend on any external input from I/O devices.
+ 2.
+ Evaluation of the result does not cause any semantically observable side
+ effect or output, such as mutation of mutable objects or output to I/O
+ devices.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-pure-fn"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Evaluation of the result does not cause any semantically observable side
+ effect or output, such as mutation of mutable objects or output to I/O
+ devices.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-pure-fn"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In addition or rather as a result, functional programming has some interesting
+ features.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -460,6 +648,27 @@ meta programming.
 \end_deeper
 \begin_layout Itemize
 Immutable data structures
+\end_layout
+
+\begin_layout Subsection
+Clojure 101
+\end_layout
+
+\begin_layout Subsubsection
+Lispy syntax
+\end_layout
+
+\begin_layout Subsubsection*
+Parentheses, parentheses, parentheses
+\end_layout
+
+\begin_layout Subsubsection*
+Prexi vs.
+ Infix notation
+\end_layout
+
+\begin_layout Subsubsection
+Defining functions
 \end_layout
 
 \begin_layout Section
