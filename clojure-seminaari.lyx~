@@ -17,6 +17,7 @@
 
 \graphics default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -96,7 +97,7 @@ Kadenius
 \end_layout
 
 \begin_layout Abstract
-Clojure is a lisp.
+Clojure on puhevika.
 \end_layout
 
 \begin_layout Section
@@ -104,121 +105,12 @@ Clojure
 \end_layout
 
 \begin_layout Subsection
-What is Clojure?
+wut is Clojure?
 \end_layout
 
 \begin_layout Standard
 Shortly Clojure, a dialect of Lisp, is a dynamically typed functional programmin
 g language hosted on virtual machines like JVM and CLR.
-\end_layout
-
-\begin_layout Subsubsection
-Dialect of Lisp
-\end_layout
-
-\begin_layout Code
-(= 2 (+ 1 1))
-\end_layout
-
-\begin_layout Quotation
-\begin_inset Quotes eld
-\end_inset
-
-Lisp is a family of computer programming languages based on formal functional
- calculus.
- Lisp (for "List Processing Language") stores and manipulates programs in
- the same manner as any other data, making it well suited for "meta-programming"
- applications.
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "lisp-wikiquote"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Dynamic typing
-\end_layout
-
-\begin_layout Quotation
-\begin_inset Quotes eld
-\end_inset
-
-In a
-\emph on
- dynamically typed 
-\emph default
-language, values have fixed types, but variables and expressions have no
- fixed types.
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "watt-04"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Functional programming
-\end_layout
-
-\begin_layout Quotation
-\begin_inset Quotes eld
-\end_inset
-
-In functional programming, the model of computation is the application of
- functions to arguments.
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "watt-04"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Key features
-\end_layout
-
-\begin_layout Standard
-What makes Clojure stand out in the pool of new and fancy programming language
- is that it has been developed from the ground up with multithreaded programming
- in mind.
- 
-\emph on
-Immutable data structures
-\emph default
-, support for 
-\emph on
-software transactional memory
-\emph default
- (STM) with the combination of 
-\emph on
-functional programming
-\emph default
- paradigm give Clojure good tools working with concurrency.
-\end_layout
-
-\begin_layout Standard
-In addition to a sound concurrency story Clojure also provides dynamic developme
-nt environment via Read-Eval-Print-Loop (REPL).
- With REPL you can ...
 \end_layout
 
 \begin_layout Subsubsection
@@ -231,15 +123,8 @@ Imperative programming
 \end_layout
 
 \begin_layout Quotation
-\begin_inset Quotes eld
-\end_inset
-
-Imperative programming is a programming paradigm that describes computation
- in terms of statements that change a program state.
-\begin_inset Quotes erd
-\end_inset
-
-
+"Imperative programming is a programming paradigm that describes computation
+ in terms of statements that change a program state."
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wiki-imp-prg"
@@ -269,8 +154,9 @@ key "wiki-imp-prg"
 Object oriented programming
 \end_layout
 
-\begin_layout Quotation
-"The set of values of the attributes of a particular object is called its
+\begin_layout Standard
+Object oriented programming provides a feature called encapsulation.
+ "The set of values of the attributes of a particular object is called its
  state.
  The object consists of state and the behavior that's defined in the object's
  classes." 
@@ -280,11 +166,6 @@ key "wiki-oo"
 
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-Object oriented programming provides a feature called encapsulation.
  Encapsulation prevents users of the object from direcly modifying the data
  that forms the state by providing operations (methods) for doing it.
  This is done in order to ensure the validity of the internal state of the
@@ -316,204 +197,19 @@ key "cloj-state"
 Functional programming
 \end_layout
 
-\begin_layout Quotation
-\begin_inset Quotes eld
-\end_inset
-
+\begin_layout Standard
 Functional programming has its roots in mathematics.
  Instead of providing instructions for modifying the state of the program,
  functional programming emphasizes the application of functions and avoid
  state and mutable data in general.
  
-\begin_inset Quotes eld
-\end_inset
-
-
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wiki-func"
 
 \end_inset
 
- 
-\end_layout
 
-\begin_layout Standard
-Of course functions are not unique to functional programming languages.
- However, functional languages have what is called 
-\emph on
-first class functions
-\emph default
-.
- This means that they have a central role in the code, much like objects
- do in OO languages.
- Functions can be stored to data structures and the use of 
-\emph on
-higher-order functions
-\emph default
- is common.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-1st-class-fn"
-
-\end_inset
-
- Higher-order function is a function that either takes one or more functions
- as parameters or returns one as a value.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-higher-fn"
-
-\end_inset
-
- Well-known examples of higher-order functions are 
-\emph on
-map
-\emph default
- and 
-\emph on
-fold
-\emph default
- 
-\shape italic
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-fold"
-
-\end_inset
-
-.
-
-\shape default
- 
-\begin_inset Quotes eld
-\end_inset
-
-Map is the name of a higher-order function that applies a given function
- element-wise to a list of elements and returns a list of results.
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-map"
-
-\end_inset
-
-.
- Fold is a 
-\begin_inset Quotes eld
-\end_inset
-
-function that iterate an arbitrary function over a data structure in some
- order and build up a return value
-\begin_inset Quotes erd
-\end_inset
-
-.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-fold"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Doubling the value of every item in a list with map:
-\emph on
-
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-(map (fn [x] (* x 2)) '(1 2 3))
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-In Clojure fold is called reduce.
- A trivial example for calculating the sum of the items in a list: 
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-(reduce + '(1 2 3))
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-They can be passed the focus is in pure functions.
- Pure functions if:
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Quotes eld
-\end_inset
-
-The function always evaluates the same result value given the same argument
- value(s).
- The function result value cannot depend on any hidden information or state
- that may change as program execution proceeds or between different executions
- of the program, nor can it depend on any external input from I/O devices.
- 2.
- Evaluation of the result does not cause any semantically observable side
- effect or output, such as mutation of mutable objects or output to I/O
- devices.
- 
-\begin_inset Quotes eld
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-pure-fn"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Quotes eld
-\end_inset
-
-Evaluation of the result does not cause any semantically observable side
- effect or output, such as mutation of mutable objects or output to I/O
- devices.
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-pure-fn"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In addition or rather as a result, functional programming has some interesting
- features.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -767,27 +463,6 @@ meta programming.
 Immutable data structures
 \end_layout
 
-\begin_layout Subsection
-Clojure 101
-\end_layout
-
-\begin_layout Subsubsection
-Lispy syntax
-\end_layout
-
-\begin_layout Subsubsection*
-Parentheses, parentheses, parentheses
-\end_layout
-
-\begin_layout Subsubsection*
-Prexi vs.
- Infix notation
-\end_layout
-
-\begin_layout Subsubsection
-Defining functions
-\end_layout
-
 \begin_layout Section
 Concurrency/parallelism in Clojure
 \end_layout
@@ -830,6 +505,32 @@ options "plain"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Itemize
+[msdn-func-imp] "TAULUKKO eroista" http://msdn.microsoft.com/en-us/library/bb66914
+4.aspx
+\end_layout
+
+\begin_layout Itemize
+[cloj-state] http://clojure.org/state 
+\end_layout
+
+\begin_layout Itemize
+[wiki-func] http://en.wikipedia.org/wiki/Functional_programming 
+\end_layout
+
+\begin_layout Itemize
+[wiki-imp-prg] http://en.wikipedia.org/wiki/Imperative_programming 
+\end_layout
+
+\begin_layout Itemize
+[wiki-oo] http://en.wikipedia.org/wiki/Object-oriented_programming 
+\end_layout
+
+\begin_layout Itemize
+[wiki-oo-enc] http://en.wikipedia.org/wiki/Encapsulation_%28object-oriented_progra
+mming%29 
 \end_layout
 
 \end_body

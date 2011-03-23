@@ -17,6 +17,7 @@
 
 \graphics default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -104,7 +105,11 @@ Clojure
 \end_layout
 
 \begin_layout Subsection
+<<<<<<< HEAD
+Wut is Clojure?
+=======
 What is Clojure?
+>>>>>>> 995bfbaaa7e622c439dc7427316f4edf2ab0857e
 \end_layout
 
 \begin_layout Standard
@@ -254,7 +259,17 @@ Nearly all machine code implementations are written in imperative style.
  The contents of the memory holds the state and machine language instructions
  modify it.
  Higher-level imperative languages have more advanced features like variables
- and complex statements, but the basic idea remains the same.
+ and complex statements, but the bas
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ic idea remains the same.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -731,6 +746,8 @@ key "cloj-state"
 
 \end_layout
 
+<<<<<<< HEAD
+=======
 \begin_layout Standard
 To quote Rich Hickey, the creator of Clojure: "Encapsulation just means:
  I'm in charge of this spaghetti code."
@@ -788,6 +805,7 @@ Prexi vs.
 Defining functions
 \end_layout
 
+>>>>>>> 995bfbaaa7e622c439dc7427316f4edf2ab0857e
 \begin_layout Section
 Concurrency/parallelism in Clojure
 \end_layout
