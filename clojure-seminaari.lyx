@@ -117,7 +117,18 @@ Dialect of Lisp
 \end_layout
 
 \begin_layout Code
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
 (= 2 (+ 1 1))
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Quotation
