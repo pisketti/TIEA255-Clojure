@@ -272,6 +272,52 @@ key "wiki-imp-prg"
 
 \end_layout
 
+\begin_layout Standard
+Here is a small snippet of imperative code.
+ It has a notion of state (a), which is mutated.
+ In addition an IO operation is performed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+int a = 3; 
+\end_layout
+
+\begin_layout Plain Layout
+
+int b = 4;
+\end_layout
+
+\begin_layout Plain Layout
+
+if (a < b) {
+\end_layout
+
+\begin_layout Plain Layout
+
+	a++;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+print(a);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Object oriented programming
 \end_layout
@@ -317,6 +363,106 @@ key "cloj-state"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+An example that demonstrates the imperative nature of OO code:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+class Foo {
+\end_layout
+
+\begin_layout Plain Layout
+
+    int a = 3;
+\end_layout
+
+\begin_layout Plain Layout
+
+	int b = 4;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    incA() {
+\end_layout
+
+\begin_layout Plain Layout
+
+        if (a < b) {
+\end_layout
+
+\begin_layout Plain Layout
+
+		    a++;	
+\end_layout
+
+\begin_layout Plain Layout
+
+ 	   }
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	print() {
+\end_layout
+
+\begin_layout Plain Layout
+
+		print(a);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	....
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What happens here is identical to the imperative code example except that
+ in this case the data (a and b) and the operations (a++ and print(a) )
+ are encapsulated inside the object.
+ 
+\end_layout
+
+\begin_layout Standard
+incA() is an instruction for modifying the state of the object.
+ The result of of incA may vary at differenct points of time depending on
+ the state of the object.
 \end_layout
 
 \begin_layout Subsection
@@ -607,8 +753,8 @@ Partial function application and currying
 \end_layout
 
 \begin_layout Standard
-Higher functions enables an interesting feature where a new function can
- be generated based on another function.
+Higher-order functions enable an interesting feature where a new function
+ can be generated based on another function.
  
 \emph on
 Partial function application
@@ -624,8 +770,8 @@ Currying
  single argument and produces a function which takes one argument less than
  its predecessor.
  Ie.
- currying produces a chain functions, whereas with partial function application
- all the arguments can be fixed at once.
+ currying produces a chain of functions, whereas with partial function applicati
+on all the arguments can be fixed at once.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -633,12 +779,17 @@ key "wiki-curry"
 
 \end_inset
 
- Out of the box, Clojure supports partial function application but not currying.
  
 \end_layout
 
 \begin_layout Standard
-A simple example of a function that adds 2 to its argument:
+Out of the box, Clojure supports partial function application but not currying.
+ 
+\end_layout
+
+\begin_layout Standard
+A simple example where a function that adds 2 to its argument is applied
+ to list of elements
 \end_layout
 
 \begin_layout Itemize
@@ -648,18 +799,18 @@ status open
 
 \begin_layout Plain Layout
 
-((partial + 2) 3)
+(map(partial + 2) '(1 2 3))
 \end_layout
 
 \end_inset
 
 
 \emph on
- => (+ 2 3) => 5
+ => ((+ 2 1)(+ 2 2)(+ 3 3))=> (3 5 7)
 \begin_inset Newline newline
 \end_inset
 
-prefix notation: (2 + 3)
+prefix notation: ((2 + 1)(2 + 2)(2 + 3))
 \end_layout
 
 \begin_layout Subsection
