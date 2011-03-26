@@ -1,4 +1,4 @@
-#LyX 1.6.9 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.8 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -95,10 +95,6 @@ Kadenius
 
 \end_layout
 
-\begin_layout Abstract
-Clojure is a lisp.
-\end_layout
-
 \begin_layout Section
 Introduction
 \end_layout
@@ -137,7 +133,7 @@ key "kraus-2009"
 
 \begin_layout Standard
 The paper gives first a short tour to very basics of Clojure and dives into
- further details language and its features.
+ further details of the language and its features.
 \end_layout
 
 \begin_layout Subsection
@@ -427,7 +423,7 @@ status open
 
 \begin_layout Standard
 Clojure, as all Lisps, uses prefix notation in contrast to infix notation
- which used in languages like C, C++ and Java.
+ is which used in languages like C, C++ and Java.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -655,7 +651,7 @@ key "wiki-imp-prg"
 \begin_layout Standard
 Here is a small snippet of imperative code.
  It has a notion of state (a), which is mutated.
- In addition an IO operation is performed.
+ In addition, an IO operation is performed.
 \end_layout
 
 \begin_layout Standard
@@ -834,15 +830,14 @@ class Foo {
 
 \begin_layout Standard
 What happens here is identical to the imperative code example except that
- in this case the data (a and b) and the operations mutating the state or
- causing other side effects (a++ and print(a) ) are encapsulated inside
- the object.
+ in this case the data (a and b) and the operations mutating the state (a++)
+ or causing other side effects (print(a) ) are encapsulated inside the object.
  
 \end_layout
 
 \begin_layout Standard
 increment() is an instruction for modifying the state of the object.
- The result of of increment() may vary at differenct points of time depending
+ The result of increment() may vary in different points of time depending
  on the state of the object.
 \end_layout
 
@@ -1085,7 +1080,7 @@ key "wiki-fold"
 \end_layout
 
 \begin_layout Itemize
-Doubling the value of every item in a list with map:
+Doubling the value of every element in a list using map:
 \emph on
 
 \begin_inset listings
@@ -1103,7 +1098,7 @@ status open
 \begin_inset Newline newline
 \end_inset
 
-prefix notation: (2 * 1) (2 * 2)(2 * 3)
+infix notation equivalent: (2 * 1) (2 * 2)(2 * 3)
 \end_layout
 
 \begin_layout Itemize
@@ -1126,7 +1121,7 @@ status open
 \begin_inset Newline newline
 \end_inset
 
-prefix notation: (1+2) + 3
+infix notation equivalent: (1+2) + 3
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1152,7 +1147,7 @@ Currying
  its predecessor.
  Ie.
  currying produces a chain of functions, whereas with partial function applicati
-on all the arguments can be fixed at once.
+on arbitrary number of functions can be fixed at once.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1170,7 +1165,7 @@ Out of the box, Clojure supports partial function application but not currying.
 
 \begin_layout Standard
 A simple example where a function that adds 2 to its argument is applied
- to list of elements
+ to a list of elements:
 \end_layout
 
 \begin_layout Itemize
@@ -1191,7 +1186,7 @@ status open
 \begin_inset Newline newline
 \end_inset
 
-prefix notation: ((2 + 1)(2 + 2)(2 + 3))
+infix notation equivalent: ((2 + 1)(2 + 2)(2 + 3))
 \end_layout
 
 \begin_layout Subsection
@@ -1199,6 +1194,13 @@ Differences
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "msdn-func-imp"
+
+\end_inset
+
+
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="3">
 <features islongtable="true">
@@ -1219,6 +1221,8 @@ Characteristic
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 Imperative approach
 \end_layout
 
@@ -1228,6 +1232,8 @@ Imperative approach
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 Functional approach
 \end_layout
 
@@ -1494,8 +1500,8 @@ Instructions are executed one after another.
 \end_layout
 
 \begin_layout Standard
-Moore's law states that the transistor the number of transistors than can
- be placed in a an integrated circuit doubles aproximately every two years.
+Moore's law states that the number of transistors than can be placed in
+ an integrated circuit doubles approximately every two years.
  The trend started in 1958 and is expected to continue until 2015 or 2020
  or later.
  
@@ -1505,7 +1511,7 @@ key "wiki-moore"
 
 \end_inset
 
- The extra transistors cannot be used for increasing the frequency of a
+ The extra transistors cannot be used for increasing the frequency of the
  microprocessor, but they can be used for adding new processor cores for
  parallel computing 
 \begin_inset CommandInset citation
