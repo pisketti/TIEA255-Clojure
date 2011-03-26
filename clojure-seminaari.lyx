@@ -1,4 +1,4 @@
-#LyX 1.6.8 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.9 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -100,15 +100,47 @@ Clojure is a lisp.
 \end_layout
 
 \begin_layout Section
-What is Clojure?
+Introduction
 \end_layout
 
 \begin_layout Standard
-Shortly Clojure, a dialect of Lisp, is a dynamically typed functional programmin
-g language hosted on virtual machines like JVM and CLR.
+This seminar paper introduces Clojure, a dialect of Lisp, which is a dynamically
+ typed functional programming language hosted on virtual machines like JVM
+ and CLR.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+The key point that makes Clojure stand out in the pool of new and fancy
+ programming languages is the fact it has been developed from the ground
+ up with multithreaded programming in mind.
+ 
+\emph on
+Immutable data structures
+\emph default
+, support for 
+\emph on
+software transactional memory
+\emph default
+ (STM) with the combination of 
+\emph on
+functional programming
+\emph default
+ paradigm give Clojure good tools working with concurrency.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kraus-2009"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The paper gives first a short tour to very basics of Clojure and dives into
+ further details language and its features.
+\end_layout
+
+\begin_layout Subsection
 Dialect of Lisp
 \end_layout
 
@@ -149,7 +181,7 @@ key "lisp-wikiquote"
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Dynamic typing
 \end_layout
 
@@ -176,7 +208,7 @@ key "watt-04"
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Functional programming
 \end_layout
 
@@ -199,33 +231,381 @@ key "watt-04"
 
 \end_layout
 
+\begin_layout Section
+Clojure syntax
+\end_layout
+
 \begin_layout Subsection
-Key features
+Lispy syntax
+\end_layout
+
+\begin_layout Subsubsection
+Parentheses, parentheses, parentheses
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+These are your father's parentheses.
+ Elegant weapons, for a more...
+ civilized age.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xkcd-297"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-What makes Clojure stand out in the pool of new and fancy programming language
- is that it has been developed from the ground up with multithreaded programming
- in mind.
+As Lisps are about lists - the name LISP derives from "LISt Processing"
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mccarthy-1960"
+
+\end_inset
+
+, and lists in Lisps are about parentheses.
+ Which means that in Clojure reading and writing parentheses is a inevitable.
+\end_layout
+
+\begin_layout Subsubsection
+Lists
+\end_layout
+
+\begin_layout Standard
+In Clojure, as in all the Lisps, the lists have special syntax to them which
+ is due to the homoiconicity - code is data and data is code.
+ This might seem confusing at first but the rules are quite simple although
+ they overload the definition of lists a bit.
+\end_layout
+
+\begin_layout Standard
+Below we can see a list which evaluates to a function call to + with 1,
+ 2, and 3 as parameters to that function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(+ 1 2 3)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Below is a definition of list with numbers.
+ Quote in the beginning of the line tells the compiler that it should treat
+ the following list just as data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+'(+ 1 2 3)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Below we can see how a list can be also constructed with a function call
+ to a list.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(list + 1 2 3)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Prefix vs.
+ infix notation
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Polish notation, also known as prefix notation, is a form of notation for
+ logic, arithmetic, and algebra.
+ Its distinguishing feature is that it places operators to the left of their
+ operands.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-polish"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
++ 1 2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Infix notation is the common arithmetic and logical formula notation, in
+ which operators are written infix-style between the operands they act on
+ (e.g.
+ 2 + 2).
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-infix"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+1 + 2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clojure, as all Lisps, uses prefix notation in contrast to infix notation
+ which used in languages like C, C++ and Java.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-polish"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-infix"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Defining functions
+\end_layout
+
+\begin_layout Standard
+As functions are first-class objects in Clojure, there are many ways of
+ defining them.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-functional"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(def hai (fn [] "Ou hai!"))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Above we define a function that returns string 
+\begin_inset Quotes eld
+\end_inset
+
+Ou hai!
+\begin_inset Quotes erd
+\end_inset
+
+ by using
+\emph on
+ macros 
+\emph default
+called
+\emph on
+ fn
+\emph default
+ and 
+\emph on
+def
+\emph default
+.
  
 \emph on
-Immutable data structures
+fn
 \emph default
-, support for 
+ that creates the function takes names and the default values for parameters
+ inside [] as the first parameter and the body of the function as the second
+ parameter.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-core-api"
+
+\end_inset
+
+A macro called 
 \emph on
-software transactional memory
+def
 \emph default
- (STM) with the combination of 
-\emph on
-functional programming
-\emph default
- paradigm give Clojure good tools working with concurrency.
+ binds a the name with a value.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-core-api"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-In addition to a sound concurrency story Clojure also provides dynamic developme
-nt environment via Read-Eval-Print-Loop (REPL).
- With REPL you can ...
+You can also define functions with a 
+\emph on
+macro
+\emph default
+ called 
+\emph on
+defn
+\emph default
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-functional"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(defn hai-u [u]
+\end_layout
+
+\begin_layout Plain Layout
+
+  (str "Hai, " u))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That 
+\emph on
+macro
+\emph default
+ takes the name, optionally a document string and attribute map, parameters
+ and the function body as parameters.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-core-api"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+You can also use a Clojures dispatch macro to create a function.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-reader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(def hai-u2 #(str "Hai, " %1 " and " %2))
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -846,27 +1226,6 @@ meta programming.
 \end_deeper
 \begin_layout Itemize
 Immutable data structures
-\end_layout
-
-\begin_layout Section
-Clojure 101
-\end_layout
-
-\begin_layout Subsubsection
-Lispy syntax
-\end_layout
-
-\begin_layout Subsubsection*
-Parentheses, parentheses, parentheses
-\end_layout
-
-\begin_layout Subsubsection*
-Prexi vs.
- Infix notation
-\end_layout
-
-\begin_layout Subsubsection
-Defining functions
 \end_layout
 
 \begin_layout Section
