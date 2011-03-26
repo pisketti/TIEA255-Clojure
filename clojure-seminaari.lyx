@@ -345,27 +345,153 @@ key "wiki-func"
  
 \end_layout
 
+\begin_layout Subsubsection
+Functions as first class objects
+\end_layout
+
 \begin_layout Standard
-Of course functions are not unique to functional programming languages.
+The notion of a function is not unique to functional programming languages.
  However, functional languages have what is called 
 \emph on
 first class functions
 \emph default
 .
- This means that they have a central role in the code, much like objects
+ This means that functions have a central role in the code, much like objects
  do in OO languages.
  Functions can be stored to data structures and the use of 
 \emph on
 higher-order functions
 \emph default
  is common.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wiki-1st-class-fn"
 
 \end_inset
 
- Higher-order function is a function that either takes one or more functions
+ The objective of having no side effects manifests itself in 
+\emph on
+pure functions
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Function is considered pure if:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+The function always evaluates the same result value given the same argument
+ value(s).
+ The function result value cannot depend on any hidden information or state
+ that may change as program execution proceeds or between different executions
+ of the program, nor can it depend on any external input from I/O devices.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-pure-fn"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+Evaluation of the result does not cause any semantically observable side
+ effect or output, such as mutation of mutable objects or output to I/O
+ devices.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-pure-fn"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using pure functions has several benefits: 
+\end_layout
+
+\begin_layout Enumerate
+Pure expression can be removed without affecting other expression if the
+ result of the pure expression is not used.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-func"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Referential transparency
+\emph default
+.
+ An expression can be replaced with its value without causing changes to
+ the program.
+ The output is always the same with the same input.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-reftrans"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If a pure function does not depend on the result of another pure function,
+ they can be performed in any order.
+ Ie.
+ they are thread-safe and can be run in parallel without typical concurrency
+ issues.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-func"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Lack of side effects guaranteed by the language, provides opportunities
+ for compiler optimizations.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-func"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Higher-order functions
+\end_layout
+
+\begin_layout Standard
+Higher-order function is a function that either takes one or more functions
  as parameters or returns one as a value.
  
 \begin_inset CommandInset citation
@@ -460,58 +586,6 @@ status open
 
 (reduce + '(1 2 3))
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-They can be passed the focus is in pure functions v.
- Pure functions if:
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Quotes eld
-\end_inset
-
-The function always evaluates the same result value given the same argument
- value(s).
- The function result value cannot depend on any hidden information or state
- that may change as program execution proceeds or between different executions
- of the program, nor can it depend on any external input from I/O devices.
- 2.
- Evaluation of the result does not cause any semantically observable side
- effect or output, such as mutation of mutable objects or output to I/O
- devices.
- 
-\begin_inset Quotes eld
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-pure-fn"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Quotes eld
-\end_inset
-
-Evaluation of the result does not cause any semantically observable side
- effect or output, such as mutation of mutable objects or output to I/O
- devices.
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "wiki-pure-fn"
 
 \end_inset
 
