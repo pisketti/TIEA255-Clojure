@@ -42,7 +42,7 @@
 \begin_body
 
 \begin_layout Title
-Clojure
+(Clojure (for the masses))
 \end_layout
 
 \begin_layout Date
@@ -652,6 +652,52 @@ key "wiki-imp-prg"
 
 \end_layout
 
+\begin_layout Standard
+Here is a small snippet of imperative code.
+ It has a notion of state (a), which is mutated.
+ In addition an IO operation is performed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+int a = 3; 
+\end_layout
+
+\begin_layout Plain Layout
+
+int b = 4;
+\end_layout
+
+\begin_layout Plain Layout
+
+if (a < b) {
+\end_layout
+
+\begin_layout Plain Layout
+
+	a++;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+print(a);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Object oriented programming
 \end_layout
@@ -697,6 +743,107 @@ key "cloj-state"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+An example that demonstrates the imperative nature of OO code:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+class Foo {
+\end_layout
+
+\begin_layout Plain Layout
+
+    int a = 3;
+\end_layout
+
+\begin_layout Plain Layout
+
+	int b = 4;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    increment() {
+\end_layout
+
+\begin_layout Plain Layout
+
+        if (a < b) {
+\end_layout
+
+\begin_layout Plain Layout
+
+		    a++;	
+\end_layout
+
+\begin_layout Plain Layout
+
+ 	   }
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	print() {
+\end_layout
+
+\begin_layout Plain Layout
+
+		print(a);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	....
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What happens here is identical to the imperative code example except that
+ in this case the data (a and b) and the operations mutating the state or
+ causing other side effects (a++ and print(a) ) are encapsulated inside
+ the object.
+ 
+\end_layout
+
+\begin_layout Standard
+increment() is an instruction for modifying the state of the object.
+ The result of of increment() may vary at differenct points of time depending
+ on the state of the object.
 \end_layout
 
 \begin_layout Subsection
@@ -806,7 +953,7 @@ Using pure functions has several benefits:
 \end_layout
 
 \begin_layout Enumerate
-Pure expression can be removed without affecting other expression if the
+Pure expression can be removed without affecting other expressions if the
  result of the pure expression is not used.
  
 \begin_inset CommandInset citation
@@ -947,17 +1094,21 @@ status open
 
 \begin_layout Plain Layout
 
-(map (fn [x] (* x 2)) '(1 2 3))
+(map (fn [x] (* 2 x)) '(1 2 3))
 \end_layout
 
 \end_inset
 
+=> ((* 2 1) (* 2 2) (* 2 3)) => (2 4 6)
+\begin_inset Newline newline
+\end_inset
 
+prefix notation: (2 * 1) (2 * 2)(2 * 3)
 \end_layout
 
 \begin_layout Itemize
 In Clojure fold is called reduce.
- A trivial example for calculating the sum of the items in a list: 
+ A trivial example for calculating the sum of the elements in a list: 
 \begin_inset listings
 inline false
 status open
@@ -970,11 +1121,77 @@ status open
 \end_inset
 
 
+\emph on
+=> (+ (+1 2) 3) => 6
+\begin_inset Newline newline
+\end_inset
+
+prefix notation: (1+2) + 3
+\end_layout
+
+\begin_layout Subsubsection*
+Partial function application and currying
 \end_layout
 
 \begin_layout Standard
-In addition or rather as a result, functional programming has some interesting
- features.
+Higher-order functions enable an interesting feature where a new function
+ can be generated based on another function.
+ 
+\emph on
+Partial function application
+\emph default
+ is a technique which produces a function in which one or more of the arguments
+ of the original function are fixed.
+ 
+\emph on
+Currying
+\emph default
+ resembles partial function application.
+ The difference is that in currying each (curried) function takes only a
+ single argument and produces a function which takes one argument less than
+ its predecessor.
+ Ie.
+ currying produces a chain of functions, whereas with partial function applicati
+on all the arguments can be fixed at once.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-curry"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Out of the box, Clojure supports partial function application but not currying.
+ 
+\end_layout
+
+\begin_layout Standard
+A simple example where a function that adds 2 to its argument is applied
+ to list of elements
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(map(partial + 2) '(1 2 3))
+\end_layout
+
+\end_inset
+
+
+\emph on
+ => ((+ 2 1)(+ 2 2)(+ 3 3))=> (3 5 7)
+\begin_inset Newline newline
+\end_inset
+
+prefix notation: ((2 + 1)(2 + 2)(2 + 3))
 \end_layout
 
 \begin_layout Subsection
@@ -1175,7 +1392,7 @@ Critique
 
 \begin_layout Standard
 The proponents of functional programming claim that imperative programming
- is flawed.
+ is fundamentally broken - especially in a multi-threaded environment.
  First of all, there is an argument that the world doesn't function in a
  way imperative programming models it.
  When dealing with mutable state, the "world" has to stop in order it be
@@ -1193,43 +1410,118 @@ key "cloj-state"
 \end_layout
 
 \begin_layout Standard
-To quote Rich Hickey, the creator of Clojure: "Encapsulation just means:
- I'm in charge of this spaghetti code."
+OO programming suffers from the same problems as imperative programming.
+ To quote Rich Hickey, the creator of Clojure: "Encapsulation just means:
+ I'm in charge of this spaghetti code." Ie.
+ encapsulation doesn't change the fact that OO is usually based on mutable
+ state.
+ It just tries to prevent the user of object's interface from seeing it
+ (the (imperative) spaghetti code).
 \end_layout
 
-\begin_layout Itemize
-Lisp
+\begin_layout Section
+Clojure features
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Dynamically typed
+\begin_layout Subsubsection
+Lispy syntax
 \end_layout
 
-\begin_layout Itemize
-Homoiconic
+\begin_layout Subsubsection*
+Parentheses, parentheses, parentheses
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Code as data.
- Data as code.
+\begin_layout Subsubsection*
+Prefix vs.
+ Infix notation
 \end_layout
 
-\begin_layout Itemize
-meta programming.
- Advanced macros.
- 
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Itemize
-Immutable data structures
+\begin_layout Subsubsection
+Defining functions
 \end_layout
 
 \begin_layout Section
 Concurrency/parallelism in Clojure
+\end_layout
+
+\begin_layout Subsection
+From serial to parallel computing
+\end_layout
+
+\begin_layout Standard
+For many years the speed of majority of computer programs could be improved
+ by upgrading the hardware on which the program was run.
+ Ie.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Frequency scaling was the dominant reason for improvements in computer performan
+ce from the mid-1980s until 2004.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-paral"
+
+\end_inset
+
+Therefore, the standard practice has been to write software for serial computati
+on meaning that: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "intro-to-paral"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Software is run on a single computer on a single processor (core) 
+\end_layout
+
+\begin_layout Itemize
+Only one instruction may execute at any moment in time.
+ 
+\end_layout
+
+\begin_layout Itemize
+Instructions are executed one after another.
+ 
+\end_layout
+
+\begin_layout Standard
+Moore's law states that the transistor the number of transistors than can
+ be placed in a an integrated circuit doubles aproximately every two years.
+ The trend started in 1958 and is expected to continue until 2015 or 2020
+ or later.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-moore"
+
+\end_inset
+
+ The extra transistors cannot be used for increasing the frequency of a
+ microprocessor, but they can be used for adding new processor cores for
+ parallel computing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-paral"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Clojure has concurrency features built-in.
+ As stated earlier, if mutable state can be avoided many of the problems
+ related to concurrent programming are solved.
+ When functions can be evaluated 
 \end_layout
 
 \begin_layout Subsection
