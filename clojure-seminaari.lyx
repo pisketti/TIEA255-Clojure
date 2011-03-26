@@ -1029,43 +1029,16 @@ key "cloj-state"
 \end_layout
 
 \begin_layout Standard
-To quote Rich Hickey, the creator of Clojure: "Encapsulation just means:
- I'm in charge of this spaghetti code."
-\end_layout
-
-\begin_layout Itemize
-Lisp
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Dynamically typed
-\end_layout
-
-\begin_layout Itemize
-Homoiconic
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Code as data.
- Data as code.
-\end_layout
-
-\begin_layout Itemize
-meta programming.
- Advanced macros.
- 
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Itemize
-Immutable data structures
+OO programming suffers from the problems.
+ To quote Rich Hickey, the creator of Clojure: "Encapsulation just means:
+ I'm in charge of this spaghetti code." In other words encapsulation doesn't
+ change the fact that OO is usually based on mutable state.
+ It just tries to prevent the user of object's interface from seeing it
+ (the spaghetti code).
 \end_layout
 
 \begin_layout Section
-Clojure 101
+Clojure features
 \end_layout
 
 \begin_layout Subsubsection
