@@ -426,7 +426,7 @@ Using pure functions has several benefits:
 \end_layout
 
 \begin_layout Enumerate
-Pure expression can be removed without affecting other expression if the
+Pure expression can be removed without affecting other expressions if the
  result of the pure expression is not used.
  
 \begin_inset CommandInset citation
@@ -572,12 +572,16 @@ status open
 
 \end_inset
 
+=> ((* 1 2) (* 2 4) (* 2 6)) => (2 4 6)
+\begin_inset Newline newline
+\end_inset
 
+prefix notation: (1 * 2) (2 * 2)(2 * 3)
 \end_layout
 
 \begin_layout Itemize
 In Clojure fold is called reduce.
- A trivial example for calculating the sum of the items in a list: 
+ A trivial example for calculating the sum of the elements in a list: 
 \begin_inset listings
 inline false
 status open
@@ -590,11 +594,72 @@ status open
 \end_inset
 
 
+\emph on
+=> (+ (+1 2) 3) => 6
+\begin_inset Newline newline
+\end_inset
+
+prefix notation: (1+2) + 3
+\end_layout
+
+\begin_layout Subsubsection*
+Partial function application and currying
 \end_layout
 
 \begin_layout Standard
-In addition or rather as a result, functional programming has some interesting
- features.
+Higher functions enables an interesting feature where a new function can
+ be generated based on another function.
+ 
+\emph on
+Partial function application
+\emph default
+ is a technique which produces a function in which one or more of the arguments
+ of the original function are fixed.
+ 
+\emph on
+Currying
+\emph default
+ resembles partial function application.
+ The difference is that in currying each (curried) function takes only a
+ single argument and produces a function which takes one argument less than
+ its predecessor.
+ Ie.
+ currying produces a chain functions, whereas with partial function application
+ all the arguments can be fixed at once.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-curry"
+
+\end_inset
+
+ Out of the box, Clojure supports partial function application but not currying.
+ 
+\end_layout
+
+\begin_layout Standard
+A simple example of a function that adds 2 to its argument:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+((partial + 2) 3)
+\end_layout
+
+\end_inset
+
+
+\emph on
+ => (+ 2 3) => 5
+\begin_inset Newline newline
+\end_inset
+
+prefix notation: (2 + 3)
 \end_layout
 
 \begin_layout Subsection
@@ -861,7 +926,7 @@ Parentheses, parentheses, parentheses
 \end_layout
 
 \begin_layout Subsubsection*
-Prexi vs.
+Prefix vs.
  Infix notation
 \end_layout
 
