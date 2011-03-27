@@ -1625,12 +1625,63 @@ There is no need for explicitly spawning new threads nor is there fear for
 Reference types
 \end_layout
 
-\begin_layout Itemize
-atom, agent and ref
+\begin_layout Standard
+Even though functional programming provides tools handling concurrency easily,
+ there are cases when the nature of the problem forces us to maintain a
+ persistent reference to a changing value.
+\end_layout
+
+\begin_layout Standard
+Clojure does provide mechanism for defining entities that may have different
+ values associated with them at different points in time.
+ Ie.
+ the values themselves don't change.
+ According to Rich Hickey, identity is 
+\begin_inset Quotes eld
+\end_inset
+
+a stable logical entity associated with a series of different values
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-state"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clojure provides 4 different mechanisms for maintaining a persistent reference
+ a changing value.
+ They are: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-vars"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-identity and equality
+vars
+\end_layout
+
+\begin_layout Itemize
+atoms 
+\end_layout
+
+\begin_layout Itemize
+agents 
+\end_layout
+
+\begin_layout Itemize
+refs
 \end_layout
 
 \begin_layout Subsection
