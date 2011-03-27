@@ -289,6 +289,35 @@ Lispy syntax
 \end_layout
 
 \begin_layout Standard
+\begin_inset Graphics
+	filename lisp.jpg
+	width 57page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+At once, just like they said, I felt a great enlightement.
+ I saw the naked structure of Lisp code unfold before me.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xkcd-224"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Lisps, like Clojure, don't have a lot of syntax in the traditional sense
  of syntax, compared to languages like Java, C or C++.
  The syntax is minimized to mainly into defining lists with parenthesis
@@ -1301,14 +1330,16 @@ Differences
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="3">
 <features islongtable="true">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<row endhead="true">
+<column alignment="center" valignment="top" width="12page%">
+<column alignment="center" valignment="top" width="21page%">
+<column alignment="center" valignment="top" width="21page%">
+<row endhead="true" endfirsthead="true">
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 Characteristic
 \end_layout
 
@@ -1342,6 +1373,8 @@ Functional approach
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 Programmer focus
 \end_layout
 
@@ -1371,6 +1404,8 @@ What information is desired and what transformations are required.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 State changes
 \end_layout
 
@@ -1400,6 +1435,8 @@ Non-existent.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 Order of execution
 \end_layout
 
@@ -1429,6 +1466,8 @@ Low importance.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 Primary flow control
 \end_layout
 
@@ -1458,6 +1497,8 @@ Function calls, including recursion.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 Primary manipulation unit
 \end_layout
 
@@ -1549,23 +1590,398 @@ Syntax
 \begin_inset Quotes eld
 \end_inset
 
-Like most other Lisps, Clojure's syntax is built on S-expressions that are
- first parsed into data structures by a reader before being compiled.
- Clojure's reader supports literal syntax for maps, sets and vectors in
- addition to lists, and these are given to the compiler as they are.
- In other words, the Clojure compiler does not compile only list data structures
-, but supports all of the mentioned types directly.
+Clojure is a homoiconic language, which is a fancy term describing the fact
+ that Clojure programs are represented by Clojure data structures.
 \begin_inset Quotes erd
 \end_inset
 
  
 \begin_inset CommandInset citation
 LatexCommand cite
-key "wiki-clojure"
+key "cloj-reader"
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Clojure syntax is built on 
+\emph on
+symbolic expression
+\emph default
+s, 
+\emph on
+S-expression
+\emph default
+s, that are list based data structures.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-s-exp,cloj-reader,wiki-clojure"
+
+\end_inset
+
+ In addition to lists also symbols, literals, vectors, maps and sets make
+ up the syntax and are parsed by the Clojure reader.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-reader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Reader
+\end_layout
+
+\begin_layout Standard
+The reader parses the textual presentation of the Clojure code to data structure
+s.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(doc read)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then it creates the form of that same data structure that the compiler will
+ see.
+ Clojure Compiler compiles the code, data structures, to host platform bytecode.
+ This bytecode is then executed by the host platform virtual machine.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-compilation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Symbols
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Symbols begin with a non-numeric character and can contain alphanumeric
+ characters and *, +, !, -, _, and ?.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-reader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(def ines "a symbol called ines")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+def is a macro that takes a symbol as a parameter and then gives that symbol
+ a value if one is given.
+ Here it defines a symbol called ines in the current namespace with the
+ value 
+\begin_inset Quotes eld
+\end_inset
+
+a symbol called ines
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-core-api"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Literals
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+'((
+\begin_inset Quotes eld
+\end_inset
+
+strings are literals as are numbers and characters 
+\begin_inset Quotes erd
+\end_inset
+
+ (1 2 3) (
+\backslash
+a 
+\backslash
+b 
+\backslash
+c)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+  (
+\begin_inset Quotes eld
+\end_inset
+
+ and of course booleans and and keywords
+\begin_inset Quotes erd
+\end_inset
+
+ true :keyword))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Lists
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(list "can contain anything you want" 1 2 3 
+\backslash
+a 
+\backslash
+b 
+\backslash
+c :keyword '())
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If you don't use ' or quote Clojure will try to use the first cell off a
+ list as a function call.
+ So if you want to just express data, use ' or quote.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+'(any of these won't be evaluated)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Vectors
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(vector '[can 
+\begin_inset Quotes eld
+\end_inset
+
+contain anything too
+\begin_inset Quotes erd
+\end_inset
+
+ 1 2 3 
+\backslash
+a 
+\backslash
+b 
+\backslash
+c :keyword])
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Maps
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(hash-map :key 
+\begin_inset Quotes eld
+\end_inset
+
+value
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+key
+\begin_inset Quotes erd
+\end_inset
+
+ :value :map {:can 
+\begin_inset Quotes eld
+\end_inset
+
+contain
+\begin_inset Quotes erd
+\end_inset
+
+ :maps 
+\begin_inset Quotes eld
+\end_inset
+
+too})
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sets
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(hash-set "can contain sets" #{:a :b} #{:b :c} "and anything unique" 1 2
+ 3 
+\backslash
+a 
+\backslash
+b 
+\backslash
+c '(:a :b))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Macros
+\end_layout
+
+\begin_layout Standard
+http://clojure.org/macros
+\end_layout
+
+\begin_layout Subsection
+Evaluation
+\end_layout
+
+\begin_layout Standard
+http://clojure.org/evaluation
+\end_layout
+
+\begin_layout Subsection
+Read-Eval-Print-Loop
+\end_layout
+
+\begin_layout Standard
+http://clojure.org/dynamic
+\end_layout
+
+\begin_layout Subsection
+Data structures
+\end_layout
+
+\begin_layout Standard
+http://clojure.org/data_structures
+\end_layout
+
+\begin_layout Subsection
+Data types
+\end_layout
+
+\begin_layout Standard
+http://clojure.org/datatypes
+\end_layout
+
+\begin_layout Subsection
+Control structures
+\end_layout
+
+\begin_layout Standard
+Here be something about loop-recur http://clojure.org/functional_programming
+ and do http://clojure.org/special_forms#Special%20Forms--(do%20exprs*),
+ http://clojuredocs.org/clojure_core/clojure.core/do and Programming Clojure
+ - Flow Control page 69-75,
 \end_layout
 
 \begin_layout Section
