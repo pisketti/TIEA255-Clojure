@@ -2171,12 +2171,550 @@ atom, agent and ref
 identity and equality
 \end_layout
 
+\begin_layout Standard
+Clojure provides 4 different mechanisms for maintaining a persistent reference
+ to a changing value.
+ They are: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-vars"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+vars
+\end_layout
+
+\begin_layout Enumerate
+atoms 
+\end_layout
+
+\begin_layout Enumerate
+agents 
+\end_layout
+
+\begin_layout Enumerate
+refs
+\end_layout
+
+\begin_layout Standard
+The reference types can be divided into 2 categories based on how they are
+ modified.
+ Vars, atoms, and refs are modified synchronously meaning that when a function
+ is applied to a syncronous reference type, the call blocks untill the function
+ has been applied.
+ Agent is the only asynchronous reference type.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wikib-clojure,cloj-vars"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Vars
+\end_layout
+
+\begin_layout Standard
+Vars resemble global variables in other programming languages.
+ [wikib] Vars can have a binding to an initial value called a root binding.
+ A root binding is shared by all threads unless the var has a per-thread
+ binding.
+ Therefore, the value of a var is its per-thread binding or if it doesn't
+ have any, its root binding.
+ If neither binding exist, then the var is unbound.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-vars"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Vars are created using the special form 
+\emph on
+def 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-vars,cloj-special-forms"
+
+\end_inset
+
+.
+ 
+\emph default
+Var is bound a given value, otherwise it is unbound.
+ If value was not supplied and the var didn't exist it is unbound.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-vars"
+
+\end_inset
+
+ Rebinding the same var with def is not encouraged since 
+\begin_inset Quotes eld
+\end_inset
+
+Subsequently calling (def something 6) is not a thread-safe operation.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wikib-clojure"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Repl examples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+user=> (def foo) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> foo 
+\end_layout
+
+\begin_layout Plain Layout
+
+java.lang.IllegalStateException: Var user/foo is unbound.
+ (NO_SOURCE_FILE:0)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (def foo 3) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> foo 
+\end_layout
+
+\begin_layout Plain Layout
+
+3
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (def foo) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (def foo) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (def foo 4) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> foo 
+\end_layout
+
+\begin_layout Plain Layout
+
+4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Atoms
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Atoms provide a way to manage shared, synchronous, independent state.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-atoms"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Shared
+\begin_inset Quotes erd
+\end_inset
+
+ means that they can be modified from different threads.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Synchronous
+\begin_inset Quotes erd
+\end_inset
+
+ means that the call function modifying an atom blocks until the operation
+ is performed.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Independent
+\begin_inset Quotes erd
+\end_inset
+
+ means that there is no coordinated mechanism for ensuring that only one
+ thread at a time can modify the value of an atom.
+ Atom uses a different technique for achieving the same goal.
+ The value of an atom is changed by applying a function called swap! to
+ its old value.
+ swap! 
+\begin_inset Quotes eld
+\end_inset
+
+swap! reads the current value, applies the function to it, and attempts
+ to compare-and-set it in.
+ Since another thread may have changed the value in the intervening time,
+ it may have to retry, and does so in a spin loop.
+ The net effect is that the value will always be the result of the application
+ of the supplied function to a current value, atomically.
+ However, because the function might be called multiple times, it must be
+ free of side effects.
+\begin_inset Quotes erd
+\end_inset
+
+ Atoms are created calling a function atom and the value its holding can
+ accessed with a function deref or a reader macro @.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-atoms,cloj-core-atom,cloj-core-deref"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Repl examples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+user=> (def foo (atom 1)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (swap! foo inc)
+\end_layout
+
+\begin_layout Plain Layout
+
+2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=>(let [bar (atom [:a])]   
+\end_layout
+
+\begin_layout Plain Layout
+
+           (println @bar)   
+\end_layout
+
+\begin_layout Plain Layout
+
+           (swap! bar conj :b))
+\end_layout
+
+\begin_layout Plain Layout
+
+[:a]
+\end_layout
+
+\begin_layout Plain Layout
+
+[:a :b]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Agents
+\end_layout
+
+\begin_layout Standard
+Agents are the asynchronous counter-part of atoms.
+ They are uncoordinated like atoms are, meaning that 
+\begin_inset Quotes eld
+\end_inset
+
+atoms and agents queue up change functions to ensure that the changes occur
+ atomicallyn
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wikib-clojure"
+
+\end_inset
+
+ Agents are modified by applying the function 
+\begin_inset Quotes eld
+\end_inset
+
+send
+\begin_inset Quotes erd
+\end_inset
+
+ on them.
+ Send 
+\begin_inset Quotes eld
+\end_inset
+
+sends
+\begin_inset Quotes erd
+\end_inset
+
+ a function to the agent, which is used for modifying the value of the agent.
+ However, unlike the case of atom, the function sent is not applied to the
+ current value immediately.
+ Instead the call to send returns immediately.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wikib-clojure"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The state of the agent can be requested by adding a watcher to the agent.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-agents"
+
+\end_inset
+
+ Alternatively, a blocking function await can be called.
+ await 
+\begin_inset Quotes eld
+\end_inset
+
+blocks the current thread (indefinitely!) until all actions dispatched thus
+ far, from this thread or agent, to the agent(s) have occurred.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-api-v12"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Repl examples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+user=> (def foo (agent 1)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> @foo
+\end_layout
+
+\begin_layout Plain Layout
+
+1	
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (do (send foo inc) (await foo))
+\end_layout
+
+\begin_layout Plain Layout
+
+nil
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> @foo
+\end_layout
+
+\begin_layout Plain Layout
+
+2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Software transactional memory system (STM)
 \end_layout
 
 \begin_layout Itemize
 refs require a transaction
+\end_layout
+
+\begin_layout Subsection
+Example: Java vs.
+ Clojure
 \end_layout
 
 \begin_layout Standard
