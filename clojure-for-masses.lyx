@@ -1748,9 +1748,9 @@ Reference types
 \end_layout
 
 \begin_layout Standard
-Even though functional programming provides tools handling concurrency easily,
- there are cases when the nature of the problem forces us to maintain a
- persistent reference to a changing value.
+Even though functional programming provides tools for handling concurrency
+ easily, there are cases when the nature of the problem forces us to maintain
+ a persistent reference to a changing value.
 \end_layout
 
 \begin_layout Standard
@@ -1790,19 +1790,19 @@ key "cloj-vars"
 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 vars
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 atoms 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 agents 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 refs
 \end_layout
 
@@ -2096,7 +2096,7 @@ key "cloj-atoms,cloj-core-atom,cloj-core-deref"
 \end_layout
 
 \begin_layout Standard
-Repl example:
+Repl examples:
 \end_layout
 
 \begin_layout Standard
@@ -2164,6 +2164,150 @@ user=>(let [bar (atom [:a])]
 
 \begin_layout Subsubsection
 Agents
+\end_layout
+
+\begin_layout Standard
+Agents are the asynchronous counter-part of atoms.
+ They are uncoordinated like atoms are, meaning that 
+\begin_inset Quotes eld
+\end_inset
+
+atoms and agents queue up change functions to ensure that the changes occur
+ atomicallyn
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wikib-clojure"
+
+\end_inset
+
+ Agents are modified by applying the function 
+\begin_inset Quotes eld
+\end_inset
+
+send
+\begin_inset Quotes erd
+\end_inset
+
+ on them.
+ Send 
+\begin_inset Quotes eld
+\end_inset
+
+sends
+\begin_inset Quotes erd
+\end_inset
+
+ a function to the agent, which is used for modifying the value of the agent.
+ However, unlike the case of atom, the function sent is not applied to the
+ current value immediately.
+ Instead the call to send returns immediately.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wikib-clojure"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The state of the agent can be requested by adding a watcher to the agent.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-agents"
+
+\end_inset
+
+ Alternatively, a blocking function await can be called.
+ await 
+\begin_inset Quotes eld
+\end_inset
+
+blocks the current thread (indefinitely!) until all actions dispatched thus
+ far, from this thread or agent, to the agent(s) have occurred.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-api-v12"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Repl examples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+user=> (def foo (agent 1)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> @foo
+\end_layout
+
+\begin_layout Plain Layout
+
+1	
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (do (send foo inc) (await foo))
+\end_layout
+
+\begin_layout Plain Layout
+
+nil
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> @foo
+\end_layout
+
+\begin_layout Plain Layout
+
+2
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
