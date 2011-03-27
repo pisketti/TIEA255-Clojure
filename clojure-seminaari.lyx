@@ -1657,7 +1657,7 @@ key "cloj-state"
 
 \begin_layout Standard
 Clojure provides 4 different mechanisms for maintaining a persistent reference
- a changing value.
+ to a changing value.
  They are: 
 \begin_inset CommandInset citation
 LatexCommand cite
