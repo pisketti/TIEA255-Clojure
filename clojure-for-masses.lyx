@@ -2299,6 +2299,10 @@ key "wikib-clojure"
 \end_inset
 
 
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2726,17 +2730,30 @@ user=> @foo
 
 \end_layout
 
+\begin_layout Subsubsection
+Refs
+\end_layout
+
+\begin_layout Standard
+Refs are transactional references (Refs) ensure safe shared use of mutable
+ storage locations via
+\end_layout
+
+\begin_layout Standard
+like ref cells in ML, boxes in Scheme, or pointers in other languages.
+ It is a "box", that you can change the contents of.
+ But unlike the other languages, the twist is that you can only make the
+ change inside of a transaction.
+ This ensures that two threads cannot have a conflict when updating or accessing
+ what is stored inside the ref.
+\end_layout
+
 \begin_layout Subsection
 Software transactional memory (STM)
 \end_layout
 
 \begin_layout Itemize
 refs require a transaction
-\end_layout
-
-\begin_layout Subsection
-Example: Java vs.
- Clojure
 \end_layout
 
 \begin_layout Standard
