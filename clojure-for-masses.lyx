@@ -1622,7 +1622,7 @@ Instructions are executed one after another.
 \end_layout
 
 \begin_layout Standard
-Moore's law states that the number of transistors than can be placed in
+Moore's law states that the number of transistors that can be placed in
  an integrated circuit doubles approximately every two years.
  The trend started in 1958 and is expected to continue until 2015 or 2020
  or later.
@@ -1645,11 +1645,102 @@ key "wiki-paral"
 .
 \end_layout
 
+\begin_layout Subsection
+Problems caused by imperative programming paradigm
+\end_layout
+
+\begin_layout Standard
+As stated earlier, by avoiding mutable state there is no need for locking
+ and threads cannot interfere with each other.
+ Let's take a look at two common concurrency issues.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+A deadlock
+\emph default
+ occurs when two threads each lock a different variable at the same time
+ and then try to lock the variable that the other thread already locked.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ms-deadlock"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+\begin_inset Quotes eld
+\end_inset
+
+Race condition
+\emph default
+ occurs when two threads access a shared variable at the same time.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ms-deadlock"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+As we can see these issues are not necessarily related to the underlying
+ problem we are trying to solve.
+ They are mere implementation details.
+\end_layout
+
+\begin_layout Subsection
+Simple things should be simple
+\end_layout
+
 \begin_layout Standard
 Clojure has concurrency features built-in.
- As stated earlier, if mutable state can be avoided many of the problems
- related to concurrent programming are solved.
- When functions can be evaluated 
+ Immutable data structures and pure functions enable trivially easy parallel
+ processing of functions as long as there is no data dependency between
+ them.
+\end_layout
+
+\begin_layout Standard
+A simple example of easy parallel execution of functions using pmap, a parallel
+ map implementation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(pmap (fn [x] (+ x 2)) '(1 2 3))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is no need for explicitly spawning new threads nor is there fear for
+ race conditions or deadlocks since the function does not rely on external
+ state or mutate anything.
 \end_layout
 
 \begin_layout Subsection
