@@ -368,7 +368,7 @@ key "mccarthy-1960"
 \end_inset
 
 , and lists in Lisps are about parentheses.
- This means that in Clojure reading and writing parentheses is inevitable.
+ This means that, in Clojure, reading and writing parentheses is inevitable.
  A lot has been said about the amount of parentheses in Lisps, both good
  and bad.
 \end_layout
@@ -1659,7 +1659,7 @@ status open
 
 \emph on
 Documentation for any given function can be acquired by calling the function
- doc
+ doc.
 \end_layout
 
 \begin_layout Standard
@@ -1921,8 +1921,17 @@ status open
 
 \begin_layout Plain Layout
 
-(hash-set "can contain sets" #{:a :b} #{:b :c} "and anything unique" 1 2
- 3 
+(hash-set 
+\end_layout
+
+\begin_layout Plain Layout
+
+  "can contain sets" #{:a :b} #{:b :c} 
+\end_layout
+
+\begin_layout Plain Layout
+
+  "and anything unique" 1 2 3 
 \backslash
 a 
 \backslash
@@ -1967,6 +1976,19 @@ Macros work differently from normal functions, and knowing how and why macros
 \begin_inset CommandInset citation
 LatexCommand cite
 key "graham-1994"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Clojure macros are implemented in a way that the compiler can be extended
+ by user code - you can really grow the language.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-macros"
 
 \end_inset
 
@@ -2107,23 +2129,122 @@ key "cloj-reader"
 
 \begin_layout Standard
 This very simple example only scratches the surface what you can do with
- macros, but it at demonstrates at least one way of creating them.
+ macros, but it demonstrates at least one way of creating them.
 \end_layout
 
 \begin_layout Subsection
 Evaluation
 \end_layout
 
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Every form not handled specially by a special form or macro is considered
+ by the compiler to be an expression, which is evaluated to yield a value.
+ There are no declarations or statements, although sometimes expressions
+ may be evaluated for their side-effects and their values ignored.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\end_layout
+
 \begin_layout Standard
-http://clojure.org/evaluation
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(println 
+\begin_inset Quotes eld
+\end_inset
+
+is a symbol that is bound to a function value
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clojure code can be evaluated interactively with REPL, forms read from a
+ stream via load or load-file or programatically with 
+\emph on
+eval
+\emph default
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-evalution"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+In all cases, evaluation is the same - a single object is considered by
+ the compiler, evaluated, and its result returned.
+ If an expression needs to be compiled, it will be.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-evalution"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
 Read-Eval-Print-Loop
 \end_layout
 
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+A read-eval-print loop (REPL), also known as an interactive toplevel, is
+ a simple, interactive computer programming environment.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-repl"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-http://clojure.org/dynamic
+Clojure has a REPL which you can use to interact with your code - you can
+ grow your program, with data loaded, adding features, fixing bugs, testing,
+ in an unbroken stream.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-dynamic"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
