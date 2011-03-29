@@ -1033,6 +1033,10 @@ pure functions
  
 \end_layout
 
+\begin_layout Subsubsection
+Pure functions
+\end_layout
+
 \begin_layout Standard
 Function is considered pure if:
 \end_layout
@@ -2252,7 +2256,123 @@ Data structures
 \end_layout
 
 \begin_layout Standard
-http://clojure.org/data_structures
+The data structures (collections) in Clojure are persistent 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-state,wiki-pers-data,cloj-data-structs"
+
+\end_inset
+
+.
+ The implementation of Clojure collections allows efficient (semantic) copying.
+ The efficiency is achieved by utilizing structural sharing.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-data-structs"
+
+\end_inset
+
+ This is possible due to the immutability.
+ Ie.
+ structural sharing between mutable data structures would be problematic.
+\end_layout
+
+\begin_layout Standard
+Collections are not bound to concrete data structures.
+ This is a big difference between Clojure and some older Lisps.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-other-lisps"
+
+\end_inset
+
+Instead, in Clojure, collections are represented by abstractions.
+ Each abstraction may have one or more implementations.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Clojure's reader supports literal syntax for maps, sets and vectors in addition
+ to lists.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-clojure"
+
+\end_inset
+
+ The The literal syntax for the aforementioned data structures was introduced
+ in chapter 4.1.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Sequences
+\end_layout
+
+\begin_layout Standard
+Another key thing related to data structure abstraction in Clojure is sequences
+ (seqs).
+ Many algorithms in Clojure use sequences as their data structure abstraction.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+A seq is a logical list, and unlike most Lisps where the list is represented
+ by a concrete, 2-slot structure
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-seq"
+
+\end_inset
+
+Seq interface (ISeq) allows many data structures to expose their elements
+ as sequences.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+The seq function yields an implementation of ISeq appropriate to the collection.
+ Seqs differ from iterators in that they are persistent and immutable, not
+ stateful cursors into a collection.
+ As such, they are useful for much more than foreach - functions can consume
+ and produce seqs, they are thread safe, they can share structure etc.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-seq"
+
+\end_inset
+
+ Clojure provides an extensive library of functions for processing sequences.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-seq"
+
+\end_inset
+
+ All sequence functions can be used with any collection.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-data-structs"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
