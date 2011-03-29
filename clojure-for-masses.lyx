@@ -2219,7 +2219,7 @@ Refs
 \begin_layout Standard
 The reference types can be divided into 2 categories based on how they are
  modified.
- Vars, atoms, and refs are modified synchronously meaning that when a function
+ Vars, Atoms, and Refs are modified synchronously meaning that when a function
  is applied to a syncronous reference type, the call blocks untill the function
  has been applied.
  Agent is the only asynchronous reference type.
@@ -2230,7 +2230,7 @@ key "wikib-clojure,cloj-vars"
 
 \end_inset
 
- Atom, agent and ref are created by calling a specific function, unsurprisingly
+ Atom, Agent and Ref are created by calling a specific function, unsurprisingly
  
 \emph on
 atom
@@ -2243,7 +2243,7 @@ agent
 \emph on
 ref
 \emph default
- respectively and the value each reference type is holding can be accessed
+ respectively and the value each reference type is holding, can be accessed
  with the function 
 \emph on
 deref 
@@ -2289,7 +2289,8 @@ key "cloj-vars,cloj-special-forms"
  
 \emph default
 Var is bound a given value, otherwise it is unbound.
- If value was not supplied and the var didn't exist it is unbound.
+ If a value was not supplied and the var did exist and had a value, the
+ old value remains bound.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2397,12 +2398,12 @@ user=> (def foo)
 
 \begin_layout Plain Layout
 
-user=> (def foo) 
+user=> foo
 \end_layout
 
 \begin_layout Plain Layout
 
-#'user/foo
+3
 \end_layout
 
 \begin_layout Plain Layout
@@ -2609,7 +2610,7 @@ Agents are the asynchronous counter-part of atoms.
 \end_inset
 
 atoms and agents queue up change functions to ensure that the changes occur
- atomicallyn
+ atomically.
 \begin_inset Quotes erd
 \end_inset
 
@@ -2750,7 +2751,7 @@ key "cloj-ref"
 
 \end_inset
 
- Enforcing a use of transaction eliminates the possibility of a conflict
+ Enforcing the use of a transaction eliminates the possibility of a conflict
  when two threads update a Ref.
  
 \begin_inset CommandInset citation
