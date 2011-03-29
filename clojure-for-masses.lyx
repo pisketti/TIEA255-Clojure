@@ -2268,10 +2268,109 @@ Control structures
 \end_layout
 
 \begin_layout Standard
-Here be something about loop-recur http://clojure.org/functional_programming
- and do http://clojure.org/special_forms#Special%20Forms--(do%20exprs*),
- http://clojuredocs.org/clojure_core/clojure.core/do and Programming Clojure
- - Flow Control page 69-75,
+
+\emph on
+if
+\emph default
+, 
+\emph on
+do
+\emph default
+, and 
+\emph on
+loop/recur
+\emph default
+ are three most common control structures in Clojure.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "halloway-2009-clojure"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+if
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(println (if (= 42 (* 6 7)) "true" "false
+\begin_inset Quotes erd
+\end_inset
+
+))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+do
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(defn grade-good?
+\end_layout
+
+\begin_layout Plain Layout
+
+  [grade]
+\end_layout
+
+\begin_layout Plain Layout
+
+  (if (> grade 3)
+\end_layout
+
+\begin_layout Plain Layout
+
+    "Good it is! :)"
+\end_layout
+
+\begin_layout Plain Layout
+
+    (do
+\end_layout
+
+\begin_layout Plain Layout
+
+      (println "Saw a low grade" number)
+\end_layout
+
+\begin_layout Plain Layout
+
+      "No, it's bad.
+ :(")))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Do is idiomatic to use when you're introducing side-effects.
+ Do ignores the return values all the other forms besides the last.
+\end_layout
+
+\begin_layout Subsubsection
+loop/recur
 \end_layout
 
 \begin_layout Section
