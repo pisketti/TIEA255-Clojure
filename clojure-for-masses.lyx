@@ -1937,8 +1937,174 @@ c '(:a :b))
 Macros
 \end_layout
 
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+The definition of a macro is essentially a function that generates Lisp
+ code—a program that writes programs.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Macros work differently from normal functions, and knowing how and why macros
+ are different is the key to using them correctly.
+ A function produces results, but a macro produces expressions—which, when
+ evaluated, produce results.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "graham-1994"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-http://clojure.org/macros
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(defmacro print-evaluate
+\end_layout
+
+\begin_layout Plain Layout
+
+  [code]
+\end_layout
+
+\begin_layout Plain Layout
+
+  `(println '~code " evaluates to " ~code))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+
+\emph on
+\begin_inset Quotes eld
+\end_inset
+
+defmacro
+\emph default
+ defines a new macro with similar structure to 
+\emph on
+defn
+\emph default
+.
+ The ` is used to create a template expression, where we can evaluate certain
+ items within the expression by using macro characters (#,~,',list-frag?).
+ 
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "foster-2009-macros"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+defmacro macro takes the name (symbol), parameter (vector) and the body
+ (expression) as parameters 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-api-v12"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+print-evaluate
+\end_layout
+
+\begin_layout Itemize
+[code]
+\end_layout
+
+\begin_layout Itemize
+`(println '~code " evaluates to " ~code)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+` , which is called either 
+\emph on
+tick
+\emph default
+ or 
+\emph on
+backquote,
+\emph default
+ stops evaluation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-reader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+'~code is equivalent to (quote ~code) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-reader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+quote stops evaluation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-reader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+~code unquotes the ` 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-reader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This very simple example only scratches the surface what you can do with
+ macros, but it at demonstrates at least one way of creating them.
 \end_layout
 
 \begin_layout Subsection
