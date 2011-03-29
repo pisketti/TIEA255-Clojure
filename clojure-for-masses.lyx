@@ -1657,6 +1657,9 @@ status open
 \end_inset
 
 
+\emph on
+Documentation for any given function can be acquired by calling the function
+ doc
 \end_layout
 
 \begin_layout Standard
@@ -1985,7 +1988,7 @@ Here be something about loop-recur http://clojure.org/functional_programming
 \end_layout
 
 \begin_layout Section
-Concurrency/parallelism in Clojure
+Concurrency in Clojure
 \end_layout
 
 \begin_layout Subsection
@@ -2127,8 +2130,7 @@ Simple things should be simple
 \end_layout
 
 \begin_layout Standard
-Clojure has concurrency features built-in.
- Immutable data structures and pure functions enable trivially easy parallel
+Immutable data structures and pure functions enable trivially easy parallel
  processing of functions as long as there is no data dependency between
  them.
 \end_layout
@@ -2163,12 +2165,26 @@ There is no need for explicitly spawning new threads nor is there fear for
 Reference types
 \end_layout
 
-\begin_layout Itemize
-atom, agent and ref
-\end_layout
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
 
-\begin_layout Itemize
-identity and equality
+Clojure, being a practical language, allows state to change but provides
+ mechanism to ensure that, when it does so, it remains consistent, while
+ alleviating developers from having to avoid conflicts manually using locks
+ etc.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-conc-prog"
+
+\end_inset
+
+ In practice, this means that Clojure has extensive concurrency features
+ built-in.
 \end_layout
 
 \begin_layout Standard
@@ -2185,19 +2201,19 @@ key "cloj-vars"
 \end_layout
 
 \begin_layout Enumerate
-vars
+Vars
 \end_layout
 
 \begin_layout Enumerate
-atoms 
+Atoms 
 \end_layout
 
 \begin_layout Enumerate
-agents 
+Agents 
 \end_layout
 
 \begin_layout Enumerate
-refs
+Refs
 \end_layout
 
 \begin_layout Standard
@@ -2214,7 +2230,27 @@ key "wikib-clojure,cloj-vars"
 
 \end_inset
 
-
+ Atom, agent and ref are created by calling a specific function, unsurprisingly
+ 
+\emph on
+atom
+\emph default
+, 
+\emph on
+agent
+\emph default
+ and 
+\emph on
+ref
+\emph default
+ respectively and the value each reference type is holding can be accessed
+ with the function 
+\emph on
+deref 
+\emph default
+or the reader macro 
+\emph on
+@.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2460,9 +2496,12 @@ Independent
  means that there is no coordinated mechanism for ensuring that only one
  thread at a time can modify the value of an atom.
  Atom uses a different technique for achieving the same goal.
- The value of an atom is changed by applying a function called swap! to
- its old value.
- swap! 
+ The value of an atom is changed by applying the function 
+\emph on
+swap!
+\emph default
+ to its old value.
+ 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2477,8 +2516,11 @@ swap! reads the current value, applies the function to it, and attempts
 \begin_inset Quotes erd
 \end_inset
 
- Atoms are created calling a function atom and the value its holding can
- accessed with a function deref or a reader macro @.
+ Atoms are created by calling the function 
+\emph on
+atom
+\emph default
+.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2579,23 +2621,12 @@ key "wikib-clojure"
 \end_inset
 
  Agents are modified by applying the function 
-\begin_inset Quotes eld
-\end_inset
-
+\emph on
 send
-\begin_inset Quotes erd
-\end_inset
-
+\emph default
  on them.
- Send 
-\begin_inset Quotes eld
-\end_inset
-
-sends
-\begin_inset Quotes erd
-\end_inset
-
- a function to the agent, which is used for modifying the value of the agent.
+ Send applies (sends) a function to the agent, which is used for modifying
+ the value of the agent.
  However, unlike the case of atom, the function sent is not applied to the
  current value immediately.
  Instead the call to send returns immediately.
@@ -2704,17 +2735,425 @@ user=> @foo
 
 \end_layout
 
+\begin_layout Subsubsection
+Refs
+\end_layout
+
+\begin_layout Standard
+Refs are mutable references bound to a single storage location.
+ The key thing about Refs is that they are transactional.
+ Ref modification has to happen within a coordinated transaction.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-ref"
+
+\end_inset
+
+ Enforcing a use of transaction eliminates the possibility of a conflict
+ when two threads update a Ref.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wikib-clojure"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Refs are created by calling the function 
+\emph on
+ref
+\emph default
+.
+ The value of a Ref is modified by using functions 
+\emph on
+ref-set
+\emph default
+, 
+\emph on
+alter
+\emph default
+ or 
+\emph on
+commute
+\emph default
+.
+ A transaction is enabled by using the macro 
+\emph on
+dosync
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Repl examples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+user=> (def foo (ref "bar")) 
+\end_layout
+
+\begin_layout Plain Layout
+
+#'user/foo
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> @foo
+\end_layout
+
+\begin_layout Plain Layout
+
+bar
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (ref-set foo "impossible") 
+\end_layout
+
+\begin_layout Plain Layout
+
+java.lang.IllegalStateException: No transaction running (NO_SOURCE_FILE:0)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> (dosync (ref-set foo "success")) 
+\end_layout
+
+\begin_layout Plain Layout
+
+"success"
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+user=> @foo
+\end_layout
+
+\begin_layout Plain Layout
+
+"success"
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Software transactional memory system (STM)
+Software transactional memory (STM)
+\end_layout
+
+\begin_layout Standard
+What exactly does a transaction, as referred in the last section, mean?
+ Clojure has a clever mechanism for automatic handling of transactions called
+ 
+\emph on
+software transactional memory (STM) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-conc-prog"
+
+\end_inset
+
+.
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+(STM) is a concurrency control mechanism analogous to database transactions
+ for controlling access to shared memory in concurrent computing.
+ It is an alternative to lock-based synchronization.
+ A transaction in this context is a piece of code that executes a series
+ of reads and writes to shared memory.
+ 
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph on
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-stm"
+
+\end_inset
+
+
+\emph default
+ STM implementations have been written for a number of languages as some
+ kind of an API or binding but in Clojure, STM is built directly into the
+ language core.
+ 
+\emph on
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-stm"
+
+\end_inset
+
+
+\emph default
+ 
+\end_layout
+
+\begin_layout Standard
+Clojure transactions are similar to those found in database management systems.
+ The STM implemention in Clojure ensures that all actions on Refs are atomic,
+ consistent and isolated.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-ref"
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Itemize
-refs require a transaction
+\begin_inset Quotes eld
+\end_inset
+
+Atomic means that every change to Refs made within a transaction occurs
+ or none do.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-ref"
+
+\end_inset
+
+ 
 \end_layout
 
-\begin_layout Subsection
-Example: Java vs.
- Clojure
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Consistent means that each new value can be checked with a validator function
+ before allowing the transaction to commit.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-ref"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Isolated means that no transaction sees the effects of any other transaction
+ while it is running.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-ref"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+If a transaction encounters a conflict while running, it is automatically
+ retried.
+\end_layout
+
+\begin_layout Standard
+On a more defailed level the implementation guarantees that: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-ref"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+All reads of Refs will see a consistent snapshot of the 'Ref world' as of
+ the starting point of the transaction (its 'read point').
+ The transaction will see any changes it has made.
+ This is called the in-transaction-value.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+All changes made to Refs during a transaction (via ref-set, alter or commute)
+ will appear to occur at a single point in the 'Ref world' timeline (its
+ 'write point').
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+No changes will have been made by any other transactions to any Refs that
+ have been ref-set/altered/ensured by this transaction.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+Changes may have been made by other transactions to any Refs that have been
+ commuted by this transaction.
+ That should be okay since the function applied by commute should be commutative.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+Readers and commuters will never block writers, commuters, or other readers.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+Writers will never block commuters, or readers.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+I/O and other activities with side-effects should be avoided in transactions,
+ since transactions will be retried.
+ The io! macro can be used to prevent the use of an impure function in a
+ transaction.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+If a constraint on the validity of a value of a Ref that is being changed
+ depends upon the simultaneous value of a Ref that is not being changed,
+ that second Ref can be protected from modification by calling ensure.
+ Refs 'ensured' this way will be protected (item #3), but don't change the
+ world (item #2).
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+The Clojure MVCC 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki-mvcc"
+
+\end_inset
+
+STM is designed to work with the persistent collections, and it is strongly
+ recommended that you use the Clojure collections as the values of your
+ Refs.
+ Since all work done in an STM transaction is speculative, it is imperative
+ that there be a low cost to making copies and modifications.
+ Persistent collections have free copies (just use the original, it can't
+ be changed), and 'modifications' share structure efficiently.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+The values placed in Refs must be, or be considered, immutable!
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
