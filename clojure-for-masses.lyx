@@ -368,7 +368,7 @@ key "mccarthy-1960"
 \end_inset
 
 , and lists in Lisps are about parentheses.
- This means that in Clojure reading and writing parentheses is inevitable.
+ This means that, in Clojure, reading and writing parentheses is inevitable.
  A lot has been said about the amount of parentheses in Lisps, both good
  and bad.
 \end_layout
@@ -1663,7 +1663,7 @@ status open
 
 \emph on
 Documentation for any given function can be acquired by calling the function
- doc
+ doc.
 \end_layout
 
 \begin_layout Standard
@@ -1925,8 +1925,17 @@ status open
 
 \begin_layout Plain Layout
 
-(hash-set "can contain sets" #{:a :b} #{:b :c} "and anything unique" 1 2
- 3 
+(hash-set 
+\end_layout
+
+\begin_layout Plain Layout
+
+  "can contain sets" #{:a :b} #{:b :c} 
+\end_layout
+
+\begin_layout Plain Layout
+
+  "and anything unique" 1 2 3 
 \backslash
 a 
 \backslash
