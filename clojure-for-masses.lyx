@@ -2470,7 +2470,7 @@ status open
 
 \begin_layout Plain Layout
 
-      (println "Saw a low grade" number)
+      (println "Low grade!" grade)
 \end_layout
 
 \begin_layout Plain Layout
