@@ -2487,10 +2487,177 @@ status open
 \begin_layout Standard
 Do is idiomatic to use when you're introducing side-effects.
  Do ignores the return values all the other forms besides the last.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "halloway-2009-clojure"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
 loop/recur
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+The loop special form works like 
+\emph on
+let
+\emph default
+, establishing bindings and then evaluating exprs.
+ The difference is that 
+\emph on
+loop
+\emph default
+ sets a recursion point, which can then be targeted by the 
+\emph on
+recur
+\emph default
+ special form.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+recur
+\emph default
+ binds new values for 
+\emph on
+loop
+\emph default
+’s bindings and returns control to the top of the 
+\emph on
+loop
+\emph default
+.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "halloway-2009-clojure"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+If the recursion point was a fn method, then it rebinds the params.
+ If the recursion point was a loop, then it rebinds the loop bindings.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-special-forms"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+(loop 
+\end_layout
+
+\begin_layout Plain Layout
+
+  [x '(1 2 3 4) sumx 0]
+\end_layout
+
+\begin_layout Plain Layout
+
+  (if (empty? x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    sumx     
+\end_layout
+
+\begin_layout Plain Layout
+
+    (recur (rest x) (+ (first x) sumx))))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The code example above iterates through the list of numbers by reducing
+ a number every recursion from the list x and adds it up to the sumx.
+\end_layout
+
+\begin_layout Itemize
+x is set to (1 2 3 4) and sumx to 0.
+\end_layout
+
+\begin_layout Itemize
+first returns the first item in the collection.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-seq"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
++ returns the addition of two numbers.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-api-v12"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+rest returns a sequence of the items after the first.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cloj-seq"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Loop/recur is a couple that main exists in Clojure due to deficiencies of
+ tail-call-recursion on host platforms.
+ 
 \end_layout
 
 \begin_layout Section
